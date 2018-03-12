@@ -85,6 +85,6 @@ class DrumMachineController {
 DrumMachineController.$inject = ["$timeout"];
 
 angular.module("drumMachine").component("drumMachineGrid", {
-  templateUrl: "/components/drum-machine/drum-machine.template.html",
+  templateUrl: "/app/components/drum-machine/drum-machine.template.html",
   controller: DrumMachineController,
 });
