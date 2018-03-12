@@ -1,0 +1,24 @@
+<div style="text-align: center">
+  <h1>Angular Drum Machine</h1>
+  <button ng-click="$ctrl.cycle(0)">Start</button>
+  <button ng-if="$ctrl.loop" ng-click="$ctrl.toggleLoop()">Stop Looping</button>
+  <button ng-if="!$ctrl.loop" ng-click="$ctrl.toggleLoop()">Start Looping</button>
+  <label>BPM:
+    <input type="number" ng-model="$ctrl.bpm" min="0" max="300" ng-change="$ctrl.changeMs()"/>
+  </label>
+  <div>
+    <table style="margin: 50px auto;">
+      <tr ng-repeat="row in $ctrl.grid">
+        <td ng-repeat="cell in row track by cell.cell">
+          <drum-machine-button value="cell.value" cell-number="cell.cell" focus=cell.focus ></drum-machine-button>
+          <!-- <button style="background-color: ivory; border: light-gray; border-radius: 10px; height: 50px; width: 50px; margin: 5px;">{{cell.cell}}</button> -->
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div>
+  {{$ctrl.ms}}
+  {{$ctrl.bpm}}
+</div>

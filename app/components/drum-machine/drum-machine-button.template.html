@@ -1,0 +1,7 @@
+<button
+  class="drumMachineButton"
+  ng-class="{ green: $ctrl.isGreen(), blue: $ctrl.isBlue(), red: $ctrl.isRed(), white: $ctrl.isWhite(), focus: $ctrl.isFocused() }"
+  ng-click="$ctrl.increaseNumber($ctrl.value)">
+  {{ $ctrl.cellNumber }}<br />
+  {{ $ctrl.value }}
+</button>

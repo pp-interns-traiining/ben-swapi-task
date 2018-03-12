@@ -23,3 +23,34 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+.drumMachineButton {
+  border: gray;
+  border-radius: 10px;
+  height: 50px;
+  width: 50px;
+  margin: 5px;
+}
+
+.green {
+  background-color: green;
+  opacity: 0.8;
+}
+
+.blue {
+  background-color: blue;
+  opacity: 0.8;
+}
+
+.red {
+  background-color: red;
+  opacity: 0.8;
+}
+
+.white {
+  background-color: ivory;
+}
+
+.focus {
+  border: 2px solid orange;
+}
