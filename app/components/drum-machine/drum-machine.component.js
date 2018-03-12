@@ -5,14 +5,14 @@ class DrumMachineController {
     this.$timeout = $timeout;
 
     this.instruments = [
-      new Audio("app/components/drum-machine/audio/Note_Low.wav"),
-      new Audio("app/components/drum-machine/audio/Clap.wav"),
-      new Audio("app/components/drum-machine/audio/Tom_Hi.wav"),
-      new Audio("app/components/drum-machine/audio/Tom_Low.wav"),
-      new Audio("app/components/drum-machine/audio/HiHat_Open.wav"),
-      new Audio("app/components/drum-machine/audio/HiHat_Closed.wav"),
-      new Audio("app/components/drum-machine/audio/Snare.wav"),
-      new Audio("app/components/drum-machine/audio/Bass.wav"),
+      new Audio("components/drum-machine/audio/Note_Low.wav"),
+      new Audio("components/drum-machine/audio/Clap.wav"),
+      new Audio("components/drum-machine/audio/Tom_Hi.wav"),
+      new Audio("components/drum-machine/audio/Tom_Low.wav"),
+      new Audio("components/drum-machine/audio/HiHat_Open.wav"),
+      new Audio("components/drum-machine/audio/HiHat_Closed.wav"),
+      new Audio("components/drum-machine/audio/Snare.wav"),
+      new Audio("components/drum-machine/audio/Bass.wav"),
     ];
 
     this.bpm = 60;
@@ -85,6 +85,6 @@ class DrumMachineController {
 DrumMachineController.$inject = ["$timeout"];
 
 angular.module("drumMachine").component("drumMachineGrid", {
-  templateUrl: "app/components/drum-machine/drum-machine.template.html",
+  templateUrl: "components/drum-machine/drum-machine.template.html",
   controller: DrumMachineController,
 });
