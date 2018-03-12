@@ -27,8 +27,7 @@ class BtnController {
 }
 
 angular.module("drumMachine").component("drumMachineButton", {
-  templateUrl:
-    "https://brosell1.github.io/swapi-task/app/components/drum-machine/drum-machine-button.template.html",
+  templateUrl: "/app/components/drum-machine/drum-machine-button.template.html",
   controller: BtnController,
   bindings: {
     value: "=",
