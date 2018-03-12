@@ -5,7 +5,7 @@ angular.module("myApp").config([
   "$locationProvider",
   "$routeProvider",
   function($locationProvider, $routeProvider) {
-    +$locationProvider.hashPrefix("!");
+    $locationProvider.hashPrefix("!");
 
     $routeProvider.otherwise({ template: "<drum-machine></drum-machine>" });
   },
