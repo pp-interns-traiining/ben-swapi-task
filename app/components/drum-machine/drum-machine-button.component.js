@@ -7,6 +7,8 @@ class BtnController {
   increaseNumber() {
     console.log(this.value);
     this.value++;
+    console.log(this.cellNumber);
+    this.playOnce(this.cellNumber);
   }
 
   isGreen() {

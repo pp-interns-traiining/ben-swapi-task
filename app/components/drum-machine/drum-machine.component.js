@@ -16,7 +16,7 @@ class DrumMachineController {
     ];
 
     this.bpm = 60;
-    this.ms = 60000 / this.bpm;
+    this.ms = 30000 / this.bpm;
     this.loop = true;
     this.grid = Array(8)
       .fill()
@@ -69,6 +69,10 @@ class DrumMachineController {
     }
   }
 
+  playOnce(number) {
+    this.resetAndPlay(number & 8);
+  }
+
   resetAndPlay(n) {
     this.instruments[n].pause();
     this.instruments[n].currentTime = 0;
@@ -78,7 +82,7 @@ class DrumMachineController {
     this.loop = !this.loop;
   }
   changeMs(bpm) {
-    this.ms = 60000 / this.bpm;
+    this.ms = 30000 / this.bpm;
   }
 }
 

@@ -6,19 +6,24 @@
   <label>BPM:
     <input type="number" ng-model="$ctrl.bpm" min="0" max="300" ng-change="$ctrl.changeMs()"/>
   </label>
-  <div>
-    <table style="margin: 50px auto;">
+  <div class="flex">
+    <div class="otherFlex">
+      <p>1 - beep</p>
+      <p>2 - handclap</p>
+      <p>3 - low tom</p>
+      <p>4 - high tom</p>
+      <p>5 - open hi-hat</p>
+      <p>6 - closed hi-hat</p>
+      <p>7 - snare</p>
+      <p>8 - bass</p>
+    </div>
+    <table>
       <tr ng-repeat="row in $ctrl.grid">
         <td ng-repeat="cell in row track by cell.cell">
-          <drum-machine-button value="cell.value" cell-number="cell.cell" focus=cell.focus ></drum-machine-button>
+          <drum-machine-button value="cell.value" cell-number="cell.cell" focus="cell.focus" playOnce="$ctrl.playOnce()"></drum-machine-button>
           <!-- <button style="background-color: ivory; border: light-gray; border-radius: 10px; height: 50px; width: 50px; margin: 5px;">{{cell.cell}}</button> -->
         </td>
       </tr>
     </table>
   </div>
-</div>
-
-<div>
-  {{$ctrl.ms}}
-  {{$ctrl.bpm}}
 </div>
