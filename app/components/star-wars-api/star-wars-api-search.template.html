@@ -2,7 +2,7 @@
   <h3>Search the database for Star Wars characters.</h3>
   <input type="text" name="term" ng-model="$ctrl.term" />
   <button ng-disabled="$ctrl.disableButton" ng-click="$ctrl.swapiSearch($ctrl.term)">Search</button>
-  <p ng-show="$ctrl.disableButton">Searching...</p>
+  <p ng-if="$ctrl.disableButton">Searching...</p>
   <p ng-show="$ctrl.activeChar">
     Name: {{$ctrl.activeChar.name}} <br />
     Date of birth: {{$ctrl.activeChar.birth_year}} <br />
@@ -13,7 +13,8 @@
     Eye colour: {{$ctrl.activeChar.eye_color}} <br />
     <button ng-click="$ctrl.setActiveChar()">Hide</button>
   </p>
-  <ul ng-show="$ctrl.finalResults[0]">
+  <ul ng-if="$ctrl.finalResults[0]">
+    <p>{{$ctrl.finalResults.length}} results.</p>
     <li ng-repeat="character in $ctrl.finalResults">
       {{character.name}}
       <button ng-click="$ctrl.setActiveChar(character)">See More</button>

@@ -3,6 +3,6 @@
     <h3>{{$ctrl.description}}</h3>
     <button ng-disabled="$ctrl.disableButton" ng-click="$ctrl.compareAges()">Click Me!</button>
   </label>
-  <p ng-show="$ctrl.disableButton">Searching...</p>
-  <p ng-show="$ctrl.answer">{{$ctrl.answer}}</p>
+  <p ng-if="$ctrl.disableButton">Searching...</p>
+  <p ng-if="$ctrl.answer">{{$ctrl.answer}}</p>
 </div>

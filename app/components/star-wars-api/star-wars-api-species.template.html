@@ -3,9 +3,9 @@
     <h3>{{$ctrl.description}}</h3>
     <button ng-disabled="$ctrl.disableButton" ng-click="$ctrl.countSpecies()">Click Me!</button>
   </label>
-  <p ng-show="$ctrl.disableButton">Searching...</p>
-  <p ng-show="$ctrl.answer">{{$ctrl.answer}}</p>
-  <ul ng-show="$ctrl.humansList[0]">
+  <p ng-if="$ctrl.disableButton">Searching...</p>
+  <p ng-if="$ctrl.answer">{{$ctrl.answer}}</p>
+  <ul ng-if="$ctrl.humansList[0]">
     <li ng-repeat="character in $ctrl.humansList">
       {{character.name}}
       <button ng-click="$ctrl.deleteItem($index)">Delete</button>
