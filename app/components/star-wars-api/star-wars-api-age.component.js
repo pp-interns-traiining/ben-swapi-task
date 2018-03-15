@@ -12,46 +12,41 @@ class StarWarsApiAgeController {
     this.$timeout = $timeout;
   }
 
-  iterableRequest(url, resolve) {
+  iterableRequest(url) {
+    if (!url) return;
     console.log("Searching...");
-    this.$http.get(url).then((response) => {
+    return this.$http.get(url).then((response) => {
       this.results = [...this.results, ...response.data.results];
-      response.data.next
-        ? this.iterableRequest(response.data.next, resolve)
-        : resolve();
+      return this.iterableRequest(response.data.next);
     });
   }
 
   compareAges() {
     this.results = [];
     this.disableButton = true;
-    new Promise((resolve, reject) =>
-      this.iterableRequest("https://swapi.co/api/people?callback=foo", resolve),
-    )
-      .then(() => {
+
+    this.iterableRequest("https://swapi.co/api/people?callback=foo").then(
+      () => {
         this.results = this.results.filter((item) =>
           item.birth_year.includes("BBY"),
         );
-      })
-      .then(() => {
         this.results.map(
           (item) => (item.birth_year = item.birth_year.slice(0, -3) - 0),
         );
         this.results = this.$filter("orderBy")(this.results, "birth_year");
         let youngest = this.results[0];
         let oldest = this.results[this.results.length - 1];
-        this.$timeout(() => {
-          this.answer = `The oldest character is the Star Wars movies is ${
-            oldest.name
-          }, born in ${oldest.birth_year}BBY. The youngest is ${
-            youngest.name
-          }, born in ${
-            youngest.birth_year
-          }BBY. There is a difference of ${oldest.birth_year -
-            youngest.birth_year} years between them.`;
-          this.disableButton = false;
-        });
-      });
+        this.answer = `The oldest character is the Star Wars movies is ${
+          oldest.name
+        }, born in ${oldest.birth_year}BBY. The youngest is ${
+          youngest.name
+        }, born in ${
+          youngest.birth_year
+        }BBY. There is a difference of ${oldest.birth_year -
+          youngest.birth_year} years between them.`;
+        this.disableButton = false;
+      },
+    );
   }
 }
 

@@ -1,22 +1,22 @@
 "use strict";
 
 class StarWarsApiSearchController {
-  constructor($http, $filter, $timeout) {
+  constructor($http, $filter, $timeout, $q) {
     this.results = [];
     this.finalResults = [];
     this.disableButton = false;
     this.$http = $http;
     this.$filter = $filter;
     this.$timeout = $timeout;
+    this.$q = $q;
   }
 
-  iterableRequest(url, resolve) {
+  iterableRequest(url) {
+    if (!url) return;
     console.log("Searching...");
-    this.$http.get(url).then((response) => {
+    return this.$http.get(url).then((response) => {
       this.results = [...this.results, ...response.data.results];
-      response.data.next
-        ? this.iterableRequest(response.data.next, resolve)
-        : resolve();
+      return this.iterableRequest(response.data.next);
     });
   }
 
@@ -29,21 +29,19 @@ class StarWarsApiSearchController {
     this.finalResults = [];
     this.activeChar = "";
     this.disableButton = true;
-    new Promise((resolve, reject) =>
-      this.iterableRequest(
-        `https://swapi.co/api/people?search=${this.term}&callback=foo`,
-        resolve,
-      ),
-    ).then(() =>
-      this.$timeout(() => {
+
+    this.iterableRequest(
+      `https://swapi.co/api/people?search=${this.term}&callback=foo`,
+    )
+      .then(() => {
         this.disableButton = false;
         this.finalResults = this.results;
-      }),
-    );
+      })
+      .catch((err) => console.log("err searching:", err));
   }
 }
 
-StarWarsApiSearchController.$inject = ["$http", "$filter", "$timeout"];
+StarWarsApiSearchController.$inject = ["$http", "$filter", "$timeout", "$q"];
 
 angular.module("starWarsApi").component("search", {
   templateUrl: "components/star-wars-api/star-wars-api-search.template.html",
