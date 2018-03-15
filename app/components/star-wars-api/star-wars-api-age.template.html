@@ -1,0 +1,9 @@
+<div class="column">
+  <label>
+    <h3>{{$ctrl.description}}</h3>
+    <button ng-disabled="$ctrl.disableButton" ng-click="$ctrl.compareAges()">Click Me!</button>
+  </label>
+  <p ng-show="$ctrl.answer">
+    {{$ctrl.answer}}
+  </p>
+</div>

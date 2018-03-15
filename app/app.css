@@ -1,18 +1,29 @@
 /* app css stylesheet */
 body {
   background-color: #f37021;
-  color: white;
   font-family: "Montserrat", "sans-serif";
   font-size: 300;
+}
+
+h1 {
+  color: white;
+}
+
+h3 {
+  color: white;
+}
+
+li {
+  color: white;
+}
+
+p {
+  color: white;
 }
 
 table {
   background-color: white;
   border-radius: 10px;
-}
-
-button {
-  color: black;
 }
 
 input {
@@ -92,4 +103,9 @@ h1 {
   justify-content: space-around;
   text-align: right;
   margin-right: 1em;
+}
+
+.column {
+  width: 30vw;
+  height: 90vh;
 }
