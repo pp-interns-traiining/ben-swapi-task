@@ -4,7 +4,6 @@ class StarWarsApiSearchController {
   constructor($http, $filter, $timeout) {
     this.results = [];
     this.finalResults = [];
-    this.term = "";
     this.disableButton = false;
     this.$http = $http;
     this.$filter = $filter;
@@ -21,9 +20,14 @@ class StarWarsApiSearchController {
     });
   }
 
+  setActiveChar(character) {
+    this.activeChar = character;
+  }
+
   swapiSearch() {
     this.results = [];
     this.finalResults = [];
+    this.activeChar = "";
     this.disableButton = true;
     new Promise((resolve, reject) =>
       this.iterableRequest(
@@ -45,6 +49,7 @@ angular.module("starWarsApi").component("search", {
   templateUrl: "components/star-wars-api/star-wars-api-search.template.html",
   controller: StarWarsApiSearchController,
   binding: {
-    term: "<",
+    term: "@",
+    activeChar: "<",
   },
 });
