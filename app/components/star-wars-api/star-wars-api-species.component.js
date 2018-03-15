@@ -1,7 +1,7 @@
 "use strict";
 
 class StarWarsApiSpeciesController {
-  constructor($http) {
+  constructor($http, starWarsService) {
     this.description =
       "Search the database for the most common species in the Star Wars movies.";
     this.results = [];
@@ -10,15 +10,7 @@ class StarWarsApiSpeciesController {
     this.answer = "";
     this.disableButton = false;
     this.$http = $http;
-  }
-
-  iterableRequest(url) {
-    if (!url) return;
-    console.log("Searching...");
-    return this.$http.get(url).then((response) => {
-      this.results = [...this.results, ...response.data.results];
-      return this.iterableRequest(response.data.next);
-    });
+    this.starWarsService = starWarsService;
   }
 
   deleteItem(index) {
@@ -36,9 +28,10 @@ class StarWarsApiSpeciesController {
       .then((response) => {
         this.count = Array(response.data.count + 1).fill(0);
       });
-    this.iterableRequest("https://swapi.co/api/people?callback=foo").then(
-      () => {
-        this.results.map((item) => {
+    this.starWarsService
+      .getCharacters("https://swapi.co/api/people?callback=foo")
+      .then((response) => {
+        response.map((item) => {
           item.species.map((item) => {
             let n = item.match(/\d+/);
             this.count[n] = this.count[n] + 1;
@@ -51,18 +44,17 @@ class StarWarsApiSpeciesController {
             this.answer = `The most common species in the Star Wars movies, appearing a total of ${
               this.count[mostCommon]
             } times, is the ${res.data.name} race.`;
-            this.results = this.results.filter((item) => item.species.length);
+            this.results = response.filter((item) => item.species.length);
             this.humansList = this.results.filter(
               (item) => item.species[0] == res.data.url,
             );
             this.disableButton = false;
           });
-      },
-    );
+      });
   }
 }
 
-StarWarsApiSpeciesController.$inject = ["$http"];
+StarWarsApiSpeciesController.$inject = ["$http", "starWarsService"];
 
 angular.module("starWarsApi").component("species", {
   templateUrl: "components/star-wars-api/star-wars-api-species.template.html",
