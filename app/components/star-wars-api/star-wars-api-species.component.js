@@ -8,6 +8,7 @@ class StarWarsApiSpeciesController {
     this.count = [];
     this.humansList = [];
     this.answer = "";
+    this.disableButton = false;
     this.$http = $http;
   }
 
@@ -30,6 +31,7 @@ class StarWarsApiSpeciesController {
 
   countSpecies() {
     this.results = [];
+    this.disableButton = true;
     this.$http
       .get("https://swapi.co/api/species?callback=foo")
       .then((response) => {
@@ -55,6 +57,7 @@ class StarWarsApiSpeciesController {
           this.humansList = this.results.filter(
             (item) => item.species[0] == res.data.url,
           );
+          this.disableButton = false;
         });
     });
   }
